@@ -7,13 +7,10 @@
 	}
 
 	var makeSnakeizerObject = function($){
-		console.log('makeSnakeizerObject')
 		var snakeizer = function(options){
-			console.log('asdfasdf');
 
             (function($) {
 
-            	console.log('asdfasdf')
 
 				var types = ['DOMMouseScroll', 'mousewheel'];
 
@@ -95,16 +92,45 @@
 			  e.preventDefault();
 			});
 
-			var fullHeight = '200px';
-			var fullWidth = '200px';
-			var itemMinHeight = '20px';
-			var itemMaxHeight = '75px';
+			var sizeFactor = 30;
 
+			var itemWidth = 1.8;
+			var itemHeight = 1.8;
+			var itemMarginTop = .2;
+			var itemMarginLeft = .2;
+			var appWidth = 20;
+			var appHeight = 12;
+
+			var $main = $('.main');
+			$main.css({
+				'width':(((appWidth-itemWidth)-(2*itemMarginLeft))*sizeFactor)+'px',
+				'height':(((appHeight-(itemHeight)-2*itemMarginTop)*sizeFactor))+'px',
+				'top':(0)+'px',
+				'left':((itemWidth+itemMarginLeft)*sizeFactor)+'px'
+			})
 
 			var $historyList = $('.historyList');
+			$historyList.css({
+				'width':(appWidth*sizeFactor)+'px',
+			  	'height':(appHeight*sizeFactor)+'px'
+			})
 			var $itemArray = [];
+			var $selected = $();
 			for(var i = 0; i< 100;i++){
-			  var $item = $('<div class="item">i</div>');
+			  var $item = $('<div class="item">'+i+'</div>');
+			  $item.css({
+			  	'width':(1.8*sizeFactor)+'px',
+			  	'height':(1.8*sizeFactor)+'px'
+			  })
+			  ;(function(i,$item){
+			  	$item.on('click',function(){
+			  		console.log(i,$item.html())
+			  		$selected.removeClass('selected')
+			  		$selected = $item;
+			  		$item.addClass('selected');
+			  		$main.html('current item details showing: ' + i)
+			  	})
+			  })(i,$item);
 			  $itemArray.push($item);
 			  $historyList.append($item);
 			}
@@ -123,24 +149,21 @@
 			    //currentScroll = -l*10;
 			  }
 			  
-			  if(currentScroll <= 0 && currentScroll >= -l*10){
+			  if(currentScroll <= 0 && currentScroll >= -l*(1*sizeFactor)){
 			    for(var i = 0; i< l;i++){
-			    console.log(currentScroll)
-			      var itemPositionTop = ((i*20) + currentScroll);
-			      if(itemPositionTop < 100 ){
-			        $itemArray[i].css({
-			          'top': (itemPositionTop)+'px',
-			          'left':'0px'
-			        })
-			      } else {
-			         $itemArray[i].css({
-			          'left': (itemPositionTop -100)+'px',//
-			          'top': '100px'
-			      })  
-			    }
-			    
-			    
-			  }
+				      var itemPositionTop = ((i*(2*sizeFactor))) + currentScroll;
+				      if(itemPositionTop < (10*sizeFactor)){
+				        $itemArray[i].css({
+				          'top': (itemPositionTop)+'px',
+				          'left':'0px'
+				        })
+				      } else {
+				         $itemArray[i].css({
+				          'left': (itemPositionTop -(10*sizeFactor))+'px',//
+				          'top': (10*sizeFactor)+'px'
+				      })  
+				    }			    
+			  	}
 			  } else {
 			    currentScroll = currentScrollCache;
 			  }

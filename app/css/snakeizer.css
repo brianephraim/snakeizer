@@ -1,20 +1,31 @@
 .x {}
 .app{
-  background:red;
+  background:#d5d5d5;
   position:relative;
+  float:right;
 } 
 .historyList{
-  background:pink;
-  height:120px;
+  background:#eee;
   position:relative;
   overflow:hidden;
-  float:right;
-  width:180px;
+  
 }
   
 .historyList .item {
-  background:yellow;
-  width:18px;
-  height:18px;
+  background:#999;
   position:absolute;
+  border:1px solid #666;
+}
+.historyList .item:hover{
+  background:#aaa;
+}
+.historyList .item.selected{
+  background:#d5d5d5;
+}
+
+.main{
+  background:#d5d5d5;
+  position: absolute;
+  text-align:center;
+  line-height:4em;
 }
