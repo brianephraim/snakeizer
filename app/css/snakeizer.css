@@ -1,0 +1,20 @@
+.x {}
+.app{
+  background:red;
+  position:relative;
+} 
+.historyList{
+  background:pink;
+  height:120px;
+  position:relative;
+  overflow:hidden;
+  float:right;
+  width:180px;
+}
+  
+.historyList .item {
+  background:yellow;
+  width:18px;
+  height:18px;
+  position:absolute;
+}
