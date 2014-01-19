@@ -108,7 +108,7 @@
 				'top':(0)+'px',
 				'left':((itemWidth+itemMarginLeft)*sizeFactor)+'px'
 			})
-
+//
 			var $historyList = $('.historyList');
 			$historyList.css({
 				'width':(appWidth*sizeFactor)+'px',
